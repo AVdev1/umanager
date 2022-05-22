@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   hmr: false,
   api: {
-    baseUrl: 'http://ubold-vertical-api.workspace'
+    baseUrl: 'http://umanager-api.workspace'
   },
   apiUrl: 'http://localhost:4000'
 };

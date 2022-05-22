@@ -1,0 +1,144 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- Project List -->
+    <section class="users-list-wrapper">
+
+      <div class="">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center"
+                >Show
+                <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                entries</label
+              >
+            </div>
+          </div>
+          <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
+            <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+              <label class="d-flex align-items-center ml-1 ml-md-0"
+                >Search:<input
+                  [(ngModel)]="searchValue"
+                  name="searchValue"
+                  type="search"
+                  class="form-control ml-25"
+                  (keyup)="filterUpdate($event)"
+                  (search)="filterUpdate($event)"
+              /></label>
+              <button class="btn btn-primary ml-1" rippleEffect (click)="toggleSidebar('new-project-sidebar')">
+                <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+                ><span class="d-none d-sm-inline-block">Add New Project</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Design Card -->
+        <div class="container">
+          <div class="row">
+            <div *ngFor="let item of rows" class="col-lg-4 col-md-6 col-12">
+              <div class="card card-app-design">
+                <div class="card-body">
+                  <div class="badge badge-light-primary" [innerHTML]="item?.pkey"></div>
+                  <h4 class="card-title mt-1 mb-75" [innerHTML]="item?.pname"></h4>
+                  <p class="card-text font-small-2 mb-2" [innerHTML]="item?.summary"></p>
+<!--                  <div class="design-group" *ngIf="item?.category?.length">-->
+<!--                    <h6 class="section-label">Category</h6>-->
+<!--                    <div class="badge badge-light-warning mr-1" *ngFor="let category of item?.category;" [innerHTML]="category"></div>-->
+<!--                  </div>-->
+                  <div class="design-group" *ngIf="item?.team?.length">
+                    <h6 class="section-label">Team</h6>
+                    <div class="avatar" *ngFor="let member of item?.team;" [innerHTML]="member">
+                      <img src="assets/images/portrait/small/avatar-s-9.jpg" width="34" height="34" alt="Avatar" />
+                    </div>
+                  </div>
+                  <div class="design-planning-wrapper">
+                    <div class="design-planning">
+                      <p class="card-text mb-25">Start Date</p>
+                      <h6 class="mb-0" [innerHTML]="item?.start | date:'dd.MM.YYYY'"></h6>
+                    </div>
+                    <div class="design-planning">
+                      <p class="card-text mb-25">Due Date</p>
+                      <h6 class="mb-0" [innerHTML]="item?.end | date:'dd.MM.YYYY'"></h6>
+                    </div>
+<!--                    <div class="design-planning">-->
+<!--                      <p class="card-text mb-25">Cost</p>-->
+<!--                      <h6 class="mb-0">$840.99</h6>-->
+<!--                    </div>-->
+                  </div>
+                  <a type="button" class="btn btn-primary btn-block" routerLink="/apps/project/project-view/{{ item?.id }}" rippleEffect>View Project</a>
+                </div>
+              </div>
+            </div>
+<!--            <div class="col-lg-4 col-md-6 col-12">-->
+<!--              <div class="card card-app-design">-->
+<!--                <div class="card-body">-->
+<!--                  <div class="badge badge-light-primary">03 Sep, 20</div>-->
+<!--                  <h4 class="card-title mt-1 mb-75">App design</h4>-->
+<!--                  <p class="card-text font-small-2 mb-2">-->
+<!--                    You can Find Only Post and Quotes Related to IOS like ipad app design, iphone app design-->
+<!--                  </p>-->
+<!--                  <div class="design-group">-->
+<!--                    <h6 class="section-label">Team</h6>-->
+<!--                    <div class="badge badge-light-warning mr-1">Figma</div>-->
+<!--                    <div class="badge badge-light-primary">Wireframe</div>-->
+<!--                  </div>-->
+<!--                  <div class="design-group">-->
+<!--                    <h6 class="section-label">Members</h6>-->
+<!--                    <div class="avatar">-->
+<!--                      <img src="assets/images/portrait/small/avatar-s-9.jpg" width="34" height="34" alt="Avatar" />-->
+<!--                    </div>-->
+<!--                    <div class="avatar bg-light-danger">-->
+<!--                      <div class="avatar-content">PI</div>-->
+<!--                    </div>-->
+<!--                    <div class="avatar">-->
+<!--                      <img src="assets/images/portrait/small/avatar-s-14.jpg" width="34" height="34" alt="Avatar" />-->
+<!--                    </div>-->
+<!--                    <div class="avatar">-->
+<!--                      <img src="assets/images/portrait/small/avatar-s-7.jpg" width="34" height="34" alt="Avatar" />-->
+<!--                    </div>-->
+<!--                    <div class="avatar bg-light-secondary">-->
+<!--                      <div class="avatar-content">AL</div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="design-planning-wrapper">-->
+<!--                    <div class="design-planning">-->
+<!--                      <p class="card-text mb-25">Due Date</p>-->
+<!--                      <h6 class="mb-0">12 Apr, 21</h6>-->
+<!--                    </div>-->
+<!--                    <div class="design-planning">-->
+<!--                      <p class="card-text mb-25">Budget</p>-->
+<!--                      <h6 class="mb-0">$49251.91</h6>-->
+<!--                    </div>-->
+<!--                    <div class="design-planning">-->
+<!--                      <p class="card-text mb-25">Cost</p>-->
+<!--                      <h6 class="mb-0">$840.99</h6>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <button type="button" class="btn btn-primary btn-block" rippleEffect>Join Team</button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+        </div>
+        <!--/ App Design Card -->
+      </div>
+    </section>
+    <!--/ Project List -->
+  </div>
+
+  <!-- New Project Sidebar -->
+  <core-sidebar
+    class="modal modal-slide-in sidebar-todo-modal fade"
+    name="new-project-sidebar"
+    overlayClass="modal-backdrop"
+  >
+    <app-new-project-sidebar></app-new-project-sidebar>
+  </core-sidebar>
+  <!--/ New Project Sidebar -->
+</div>

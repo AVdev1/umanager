@@ -1,0 +1,29 @@
+FROM node:14
+
+EXPOSE 80
+ENV PORT=80
+
+ARG APP_UID=1000
+ENV APP_UID=${APP_UID}
+
+RUN if [ $APP_UID = "1000" ]; then\
+    userdel node; \
+fi
+
+RUN groupadd --gid $APP_UID application && \
+    useradd --uid $APP_UID --gid $APP_UID --shell /bin/bash --create-home application
+
+RUN apt-get update && apt-get install -y libcap2-bin
+RUN setcap 'cap_net_bind_service=+ep' /usr/local/bin/node
+
+WORKDIR /app
+
+# Development setup part
+
+RUN npm install -g @angular/cli@10.0.6
+
+ARG BUILD_APP_ENV=workspace
+ENV APP_ENV=$BUILD_APP_ENV
+
+CMD su application -c "npm install" && \
+    su application -c "ng serve --configuration=${APP_ENV-devel} --host 0.0.0.0 --port 80 --disable-host-check"

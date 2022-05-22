@@ -1,0 +1,283 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- users edit start -->
+    <section class="app-user-edit">
+      <div class="card">
+        <div class="card-body">
+          <ul ngbNav #nav="ngbNav" class="">
+            <li ngbNavItem>
+              <ng-template ngbNavContent>
+                <!-- Account Tab starts -->
+                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+
+                  <h2 class="mb-2">Create new project</h2>
+
+                  <form class="form-validate" [formGroup]="formGroup" (ngSubmit)="submit()" #accountForm="ngForm">
+                    <div class="row">
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                          <label for="pname">Project name</label>
+                          <input
+                                  type="text"
+                                  id="pname"
+                                  class="form-control"
+                                  placeholder="Project name"
+                                  name="pname"
+                                  formControlName="pname"
+                                  [ngClass]="{'error': isSubmitted && formGroup.get('pname').errors}"
+                          />
+                          <span *ngIf="isSubmitted && formGroup.get('pname').errors" class="invalid-form">
+                            <small class="form-text text-danger" *ngIf="formGroup.get('pname').hasError('required')"
+                            >This field is required!</small
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                          <label for="pkey">Project Key</label>
+
+                          <input
+                            type="text"
+                            id="pkey"
+                            class="form-control"
+                            placeholder="Project Key"
+                            name="pkey"
+                            formControlName="pkey"
+                            [ngClass]="{'error': isSubmitted && formGroup.get('pkey').errors}"
+                            required
+                          />
+                          <span *ngIf="isSubmitted && formGroup.get('pkey').errors" class="invalid-form">
+                            <small class="form-text text-danger" *ngIf="formGroup.get('pkey').hasError('required')"
+                              >This field is required!</small
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                          <label for="summary">Summary</label>
+                          <input
+                            type="text"
+                            id="summary"
+                            class="form-control"
+                            placeholder="Summary"
+                            name="summary"
+                            formControlName="summary"
+                            [ngClass]="{'error': isSubmitted && formGroup.get('summary').errors}"
+                            required
+                          />
+                          <span *ngIf="isSubmitted && formGroup.get('summary').errors" class="invalid-form">
+                            <small class="form-text text-danger" *ngIf="formGroup.get('summary').hasError('required')"
+                            >This field is required!</small
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <label>Project Category</label>
+
+                        <div class="form-group">
+                          <!-- Add custom Tag -->
+                          <ng-select
+                                  [items]="categoryList"
+                                  [addTag]="true"
+                                  multiple="true"
+                                  bindLabel="title"
+                                  bindValue="title"
+                                  placeholder="Select category"
+                                  formControlName="category"
+                          >
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label"> {{ item.title }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </ng-template>
+                          </ng-select>
+                          <!--/ Add custom Tag -->
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <label>Team</label>
+
+                        <div class="form-group">
+                          <!-- Add custom Tag -->
+                          <ng-select
+                                  [items]="userList"
+                                  multiple="true"
+                                  bindLabel="username"
+                                  bindValue="id"
+                                  placeholder="Select team"
+                                  formControlName="team"
+                          >
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label"> {{ item?.first_name }} {{item?.last_name}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </ng-template>
+                          </ng-select>
+                          <!--/ Add custom Tag -->
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group position-relative">
+                          <label for="start-date" class="form-label">Start Date</label>
+                          <ng2-flatpickr
+                                  id="start-date"
+                                  [config]="startDateOptions"
+                                  name="start"
+                                  formControlName="start"
+                                  placeholder="Pick start date"
+                                  #startDatePicker
+                                  required
+                                  [class.error]="accountForm.submitted"
+                          ></ng2-flatpickr>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group position-relative">
+                          <label for="end-date" class="form-label">End Date</label>
+                          <ng2-flatpickr
+                                  id="end-date"
+                                  [config]="endDateOptions"
+                                  name="end"
+                                  formControlName="end"
+                                  placeholder="Pick end date"
+                                  #endDatePicker
+                                  required
+                                  [class.error]="accountForm.submitted"
+                          ></ng2-flatpickr>
+                        </div>
+                      </div>
+
+
+<!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="email">E-mail</label>-->
+<!--                          <input-->
+<!--                            type="email"-->
+<!--                            id="email"-->
+<!--                            class="form-control"-->
+<!--                            placeholder="Email"-->
+<!--                            name="email"-->
+<!--                            formControlName="email"-->
+<!--                            [ngClass]="{'error': isSubmitted && formGroup.get('email').errors}"-->
+<!--                            required-->
+<!--                          />-->
+<!--                          <span *ngIf="isSubmitted && formGroup.get('email').errors" class="invalid-form">-->
+<!--                            <small class="form-text text-danger" *ngIf="formGroup.get('email').hasError('required')"-->
+<!--                            >This field is required!</small-->
+<!--                            >-->
+<!--                          </span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="position">Position</label>-->
+<!--                          <input-->
+<!--                                  type="text"-->
+<!--                                  id="position"-->
+<!--                                  class="form-control"-->
+<!--                                  placeholder="Position"-->
+<!--                                  name="position"-->
+<!--                                  formControlName="position"-->
+<!--                                  [ngClass]="{'error': isSubmitted && formGroup.get('position').errors}"-->
+<!--                          />-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="phone">Phone</label>-->
+<!--                          <input-->
+<!--                                  type="text"-->
+<!--                                  id="phone"-->
+<!--                                  class="form-control"-->
+<!--                                  placeholder="Phone"-->
+<!--                                  name="phone"-->
+<!--                                  formControlName="phone"-->
+<!--                                  [ngClass]="{'error': isSubmitted && formGroup.get('phone').errors}"-->
+<!--                          />-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="status">Status</label>-->
+<!--                          <select class="form-control" formControlName="status" name="status" id="status">-->
+<!--                            <option>Active</option>-->
+<!--                            <option>Inactive</option>-->
+<!--&lt;!&ndash;                            <option>pending</option>&ndash;&gt;-->
+<!--                          </select>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="password">Password</label>-->
+<!--                          <input-->
+<!--                                  type="text"-->
+<!--                                  id="password"-->
+<!--                                  class="form-control"-->
+<!--                                  placeholder="Password"-->
+<!--                                  name="password"-->
+<!--                                  formControlName="password"-->
+<!--                                  [ngClass]="{'error': isSubmitted && formGroup.get('password').errors}"-->
+<!--                          />-->
+<!--                          <span *ngIf="isSubmitted && formGroup.get('password').errors" class="invalid-form">-->
+<!--                            <small class="form-text text-danger" *ngIf="formGroup.get('password').hasError('required')"-->
+<!--                            >This field is required!</small-->
+<!--                            >-->
+<!--                          </span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+
+                      <!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="role">Role</label>-->
+<!--                          <select class="form-control" [(ngModel)]="currentRow.role" name="role" id="role">-->
+<!--                            <option>Maintainer</option>-->
+<!--                            <option>Subscriber</option>-->
+<!--                            <option>Author</option>-->
+<!--                            <option>Editor</option>-->
+<!--                            <option>Admin</option>-->
+<!--                          </select>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="col-md-4">-->
+<!--                        <div class="form-group">-->
+<!--                          <label for="company">Company</label>-->
+<!--                          <input-->
+<!--                            type="text"-->
+<!--                            class="form-control"-->
+<!--                            [(ngModel)]="currentRow.company"-->
+<!--                            placeholder="Company name"-->
+<!--                            id="company"-->
+<!--                            name="company"-->
+<!--                          />-->
+<!--                        </div>-->
+<!--                      </div>-->
+                      <div class="col-12 d-flex flex-sm-row flex-column mt-2">
+<!--                        (click)="submit(accountForm)"-->
+
+                        <button
+                          type="submit"
+                          class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"
+                          rippleEffect
+                        >
+                          Save Changes
+                        </button>
+                        <button (click)="resetFormWithDefaultValues()" class="btn btn-outline-secondary" rippleEffect>
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <!-- users edit account form ends -->
+                </div>
+                <!-- Account Tab ends -->
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+      </div>
+    </section>
+    <!-- users edit ends -->
+  </div>
+</div>

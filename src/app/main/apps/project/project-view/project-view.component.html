@@ -1,0 +1,223 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- page users view start -->
+    <section class="app-user-view">
+      <!-- User Card & Plan Starts -->
+      <div class="row">
+        <!-- User Card starts-->
+        <div class="col-xl-12">
+          <div class="card user-card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
+                  <div class="user-avatar-section">
+                    <div class="d-flex justify-content-start">
+                      <div *ngIf="data?.photo?.length > 0; else customAvatar">
+                        <img class="img-fluid rounded" [src]="data?.photo" height="104" width="104" alt="User avatar" />
+                      </div>
+                      <ng-template #customAvatar>
+                        <div class="mr-1 ml-0">
+                          <div
+                            [ngClass]="{
+                              'bg-light-success': data.status == 'active',
+                              'bg-light-secondary': data.status == 'inactive',
+                              'bg-light-warning': data.status == 'pending'
+                            }"
+                            class="rounded p-3"
+                          >
+                            <h2
+                              [ngClass]="{
+                                'text-success': data.status == 'active',
+                                'text-secondary': data.status == 'inactive',
+                                'text-warning': data.status == 'pending'
+                              }"
+                              class="m-0"
+                            >
+                              {{ data.fullName | initials }}
+                            </h2>
+                          </div>
+                        </div>
+                      </ng-template>
+                      <div class="d-flex flex-column ml-1">
+                        <div class="user-info mb-1">
+                          <h4 class="mb-0">{{ data?.pname }}</h4>
+                          <span class="card-text">{{ data?.pkey }}</span>
+                        </div>
+
+<!--                        TODO: add check current user -->
+                        <div class="d-flex flex-wrap">
+                          <a routerLink="/apps/project/project-edit/{{ data.id }}" class="btn btn-primary" rippleEffect
+                            >Edit</a
+                          >
+<!--                          <button class="btn btn-outline-danger ml-1" rippleEffect>Delete</button>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center user-total-numbers">
+                    <div class="d-flex align-items-center mr-2">
+                      <div class="color-box bg-light-primary">
+                        <i [data-feather]="'dollar-sign'" [class]="'text-primary'"></i>
+                      </div>
+                      <div class="ml-1">
+                        <h5 class="mb-0">23.3k</h5>
+                        <small>Team</small>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div class="color-box bg-light-success">
+                        <i [data-feather]="'trending-up'" [class]="'text-success'"></i>
+                      </div>
+                      <div class="ml-1">
+                        <h5 class="mb-0">$99.87K</h5>
+                        <small>Active Tasks</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+<!--                creator: "d5063888-d441-11ec-a1c8-0242ac120007"-->
+<!--                creator_first_name: "Альбіна"-->
+<!--                creator_last_name: "Васильковська"-->
+<!--                end: "2022-05-18T00:00:00.000Z"-->
+<!--                id: "8410a8cc-d451-11ec-b817-0242ac120007"-->
+<!--                maintainer: "d5063888-d441-11ec-a1c8-0242ac120007"-->
+<!--                maintainer_first_name: "Альбіна"-->
+<!--                maintainer_last_name: "Васильковська"-->
+<!--                pkey: "key"-->
+<!--                pname: "Project Name"-->
+<!--                start: "2022-05-03T00:00:00.000Z"-->
+<!--                summary: "ewopew"-->
+<!--                team: []-->
+
+                  <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">
+                    <div class="user-info-wrapper">
+                      <div class="d-flex flex-wrap">
+                        <div class="user-info-title">
+                          <i data-feather="user" class="mr-1"></i>
+                          <span class="card-text user-info-title font-weight-bold mb-0">Category</span>
+                        </div>
+                        <p class="card-text mb-0">{{ data?.category }}</p>
+                      </div>
+                      <div class="d-flex flex-wrap my-50">
+                        <div class="user-info-title">
+                          <i data-feather="check" class="mr-1"></i>
+                          <span class="card-text user-info-title font-weight-bold mb-0">Creator</span>
+                        </div>
+                        <p class="card-text mb-0">{{ data.creator_first_name + ' ' + data?.creator_last_name }}</p>
+                      </div>
+                      <div class="d-flex flex-wrap my-50">
+                        <div class="user-info-title">
+                          <i data-feather="star" class="mr-1"></i>
+                          <span class="card-text user-info-title font-weight-bold mb-0">Maintainer</span>
+                        </div>
+                        <p class="card-text mb-0">{{ data?.maintainer_first_name + ' ' + data?.maintainer_last_name }}</p>
+                      </div>
+                      <div class="d-flex flex-wrap my-50">
+                        <div class="user-info-title">
+                          <i data-feather="flag" class="mr-1"></i>
+                          <span class="card-text user-info-title font-weight-bold mb-0">Date</span>
+                        </div>
+                        <p class="card-text mb-0">{{ data?.start | date:'dd.MM.YYYY' }} - {{data?.end | date:'dd.MM.YYYY' }}</p>
+                      </div>
+                    </div>
+                  </div>
+<!--                  <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">-->
+
+<!--                </div>-->
+
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- /User Card Ends-->
+      </div>
+      <!-- User Card & Plan Ends -->
+
+      <!-- User Timeline & Permissions Starts -->
+      <div class="row">
+        <!-- project summary -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title mb-2">Summary</h4>
+            </div>
+            <div class="card-body">
+              {{data?.summary}}
+            </div>
+          </div>
+        </div>
+        <!-- project summary Ends -->
+
+        <!-- information starts -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title mb-2">User Timeline</h4>
+            </div>
+            <div class="card-body">
+              <ul class="timeline">
+                <li class="timeline-item">
+                  <span class="timeline-point timeline-point-indicator"></span>
+                  <div class="timeline-event">
+                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                      <h6>12 Invoices have been paid</h6>
+                      <span class="timeline-event-time">12 min ago</span>
+                    </div>
+                    <p>Invoices have been paid to the company.</p>
+                    <div class="media align-items-center">
+                      <img class="mr-1" src="assets/images/icons/file-icons/pdf.png" alt="invoice" height="23" />
+                      <div class="media-body">invoice.pdf</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-point timeline-point-warning timeline-point-indicator"></span>
+                  <div class="timeline-event">
+                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                      <h6>Client Meeting</h6>
+                      <span class="timeline-event-time">45 min ago</span>
+                    </div>
+                    <p>Project meeting with john @10:15am.</p>
+                    <div class="media align-items-center">
+                      <div class="avatar">
+                        <img src="assets/images/avatars/12-small.png" alt="avatar" height="38" width="38" />
+                      </div>
+                      <div class="media-body ml-50">
+                        <h6 class="mb-0">John Doe (Client)</h6>
+                        <span>CEO of Infibeam</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-point timeline-point-info timeline-point-indicator"></span>
+                  <div class="timeline-event">
+                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                      <h6>Create a new project for client</h6>
+                      <span class="timeline-event-time">2 days ago</span>
+                    </div>
+                    <p class="mb-0">Add files to new design folder</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- information Ends -->
+      </div>
+      <!-- User Timeline & Permissions Ends -->
+
+      <!-- User Invoice Starts-->
+<!--      <div class="row invoice-list-wrapper">-->
+<!--        <div class="col-12">-->
+<!--          <div class="card">-->
+<!--            <app-invoice-list></app-invoice-list>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+      <!-- /User Invoice Ends-->
+    </section>
+    <!-- page users view end -->
+  </div>
+</div>

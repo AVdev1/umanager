@@ -8,6 +8,7 @@ export class User extends Model {
   position: string;
   phone: string;
   city: string;
+  birthday: Date;
   password: string;
   roles: string[];
 }

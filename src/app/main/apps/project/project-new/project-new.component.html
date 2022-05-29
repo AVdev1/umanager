@@ -148,113 +148,28 @@
                         </div>
                       </div>
 
+                      <div class="col-sm-6 col-12">
+                        <div class="form-group">
+                          <label for="budget">Budget</label>
+                          <input
+                                  type="text"
+                                  id="budget"
+                                  class="form-control"
+                                  placeholder="Budget"
+                                  name="budget"
+                                  formControlName="budget"
+                                  [ngClass]="{'error': isSubmitted && formGroup.get('budget').errors}"
+                                  required
+                          />
+                          <span *ngIf="isSubmitted && formGroup.get('budget').errors" class="invalid-form">
+                            <small class="form-text text-danger" *ngIf="formGroup.get('budget').hasError('required')"
+                            >This field is required!</small
+                            >
+                          </span>
+                        </div>
+                      </div>
 
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="email">E-mail</label>-->
-<!--                          <input-->
-<!--                            type="email"-->
-<!--                            id="email"-->
-<!--                            class="form-control"-->
-<!--                            placeholder="Email"-->
-<!--                            name="email"-->
-<!--                            formControlName="email"-->
-<!--                            [ngClass]="{'error': isSubmitted && formGroup.get('email').errors}"-->
-<!--                            required-->
-<!--                          />-->
-<!--                          <span *ngIf="isSubmitted && formGroup.get('email').errors" class="invalid-form">-->
-<!--                            <small class="form-text text-danger" *ngIf="formGroup.get('email').hasError('required')"-->
-<!--                            >This field is required!</small-->
-<!--                            >-->
-<!--                          </span>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="position">Position</label>-->
-<!--                          <input-->
-<!--                                  type="text"-->
-<!--                                  id="position"-->
-<!--                                  class="form-control"-->
-<!--                                  placeholder="Position"-->
-<!--                                  name="position"-->
-<!--                                  formControlName="position"-->
-<!--                                  [ngClass]="{'error': isSubmitted && formGroup.get('position').errors}"-->
-<!--                          />-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="phone">Phone</label>-->
-<!--                          <input-->
-<!--                                  type="text"-->
-<!--                                  id="phone"-->
-<!--                                  class="form-control"-->
-<!--                                  placeholder="Phone"-->
-<!--                                  name="phone"-->
-<!--                                  formControlName="phone"-->
-<!--                                  [ngClass]="{'error': isSubmitted && formGroup.get('phone').errors}"-->
-<!--                          />-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="status">Status</label>-->
-<!--                          <select class="form-control" formControlName="status" name="status" id="status">-->
-<!--                            <option>Active</option>-->
-<!--                            <option>Inactive</option>-->
-<!--&lt;!&ndash;                            <option>pending</option>&ndash;&gt;-->
-<!--                          </select>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="password">Password</label>-->
-<!--                          <input-->
-<!--                                  type="text"-->
-<!--                                  id="password"-->
-<!--                                  class="form-control"-->
-<!--                                  placeholder="Password"-->
-<!--                                  name="password"-->
-<!--                                  formControlName="password"-->
-<!--                                  [ngClass]="{'error': isSubmitted && formGroup.get('password').errors}"-->
-<!--                          />-->
-<!--                          <span *ngIf="isSubmitted && formGroup.get('password').errors" class="invalid-form">-->
-<!--                            <small class="form-text text-danger" *ngIf="formGroup.get('password').hasError('required')"-->
-<!--                            >This field is required!</small-->
-<!--                            >-->
-<!--                          </span>-->
-<!--                        </div>-->
-<!--                      </div>-->
-
-                      <!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="role">Role</label>-->
-<!--                          <select class="form-control" [(ngModel)]="currentRow.role" name="role" id="role">-->
-<!--                            <option>Maintainer</option>-->
-<!--                            <option>Subscriber</option>-->
-<!--                            <option>Author</option>-->
-<!--                            <option>Editor</option>-->
-<!--                            <option>Admin</option>-->
-<!--                          </select>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="form-group">-->
-<!--                          <label for="company">Company</label>-->
-<!--                          <input-->
-<!--                            type="text"-->
-<!--                            class="form-control"-->
-<!--                            [(ngModel)]="currentRow.company"-->
-<!--                            placeholder="Company name"-->
-<!--                            id="company"-->
-<!--                            name="company"-->
-<!--                          />-->
-<!--                        </div>-->
-<!--                      </div>-->
                       <div class="col-12 d-flex flex-sm-row flex-column mt-2">
-<!--                        (click)="submit(accountForm)"-->
-
                         <button
                           type="submit"
                           class="btn btn-primary mb-1 mb-sm-0 mr-0 mr-sm-1"

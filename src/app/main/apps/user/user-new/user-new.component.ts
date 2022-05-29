@@ -28,13 +28,16 @@ export class UserNewComponent extends BaseForm implements OnInit, OnDestroy {
 
   @ViewChild('accountForm') accountForm: NgForm;
   @ViewChild('customAvatar') customAvatar: HTMLElement;
-
-  public birthDateOptions: FlatpickrOptions = {
-    altInput: true
-  };
+  @ViewChild('birthdayPicker') birthdayPicker;
 
   public selectMultiLanguages = ['English', 'Russian'];
   public selectMultiLanguagesSelected = [];
+  public birthdayOptions = {
+    altInput: true,
+    mode: 'single',
+    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
+    enableTime: false
+  };
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -55,8 +58,7 @@ export class UserNewComponent extends BaseForm implements OnInit, OnDestroy {
     photo: this.formBuilder.control("", {}),
     phone: this.formBuilder.control("", {}),
     status: this.formBuilder.control("Active", {}),
-    permission: this.formBuilder.control({}),
-    permissionList: new FormArray([]),
+    birthday: this.formBuilder.control(null, {}),
     password: this.formBuilder.control("", {
       validators: [Validators.required],
     }),
@@ -141,6 +143,10 @@ export class UserNewComponent extends BaseForm implements OnInit, OnDestroy {
     // this.submitted = true;
     this.submitPrepare();
     const data = this.formGroup.value;
+
+    //! Fix: Temp fix till ng2-flatpicker support ng-modal
+    data.birthday = this.birthdayPicker.flatpickrElement.nativeElement.children[0].value;
+
     console.log('data', data)
     return this._userNewService.createUser(data);
   }

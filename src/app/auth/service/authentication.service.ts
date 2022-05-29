@@ -26,10 +26,9 @@ export class AuthenticationService extends AdminApiService {
   constructor(private _http: HttpClient, private _toastrService: ToastrService) {
     super(_http);
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    // this.userName = this.authService.currentUser().getName();
-    // this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(this.getCurrentUser()));
 
     this.currentUser = this.currentUserSubject.asObservable();
+
   }
 
   // getter: currentUserValue
@@ -41,10 +40,7 @@ export class AuthenticationService extends AdminApiService {
    * Returns the current user
    */
   getCurrentUser() {
-    const request = this.http.get(`${this.apiUrl}/auth/me`)
-        .pipe(
-            map((response: any) => response),
-        );
+    const request = window.localStorage.getItem('currentUser')
 
     console.log('CURR USER', request)
     return request;
@@ -64,13 +60,6 @@ export class AuthenticationService extends AdminApiService {
     return this.currentUser && this.currentUserSubject.value.role === Role.Client;
   }
 
-  // getName() {
-  //   if (this.token) {
-  //     let payload: any = jwt_decode(this.token, { header: false });
-  //     return payload.name;
-  //   }
-  // }
-
   /**
    * User login
    *
@@ -86,29 +75,20 @@ export class AuthenticationService extends AdminApiService {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-
             localStorage.setItem('currentUser', JSON.stringify(user));
-
             localStorage.setItem('currentUserData', JSON.stringify(jwt_decode(user.token, {header: false})));
-            // jwt_decode(this.token, { header: false })
-            console.log('user', user)
+
             // Display welcome toast!
+            const cu =  JSON.parse(window.localStorage.getItem('currentUserData'));
             setTimeout(() => {
               this._toastrService.success(
                 'You have successfully logged in as an ' +
-                  user?.name +
-                  ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user?.first_name + '!',
+                  'user to Vuexy. Now you can start to explore. Enjoy! 🎉',
+                '👋 Welcome, ' + cu?.name + '!',
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );
             }, 2500);
 
-            // notify
-            let us = this.getCurrentUser().subscribe(i => {
-              return i;
-            })
-
-            console.log('us', us)
             this.currentUserSubject.next(user);
           }
 

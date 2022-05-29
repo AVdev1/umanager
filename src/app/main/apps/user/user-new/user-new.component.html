@@ -145,6 +145,21 @@
                         </div>
                       </div>
                       <div class="col-md-6">
+                        <div class="form-group position-relative">
+                          <label for="birthday" class="form-label">Birthday</label>
+                          <ng2-flatpickr
+                                  id="birthday"
+                                  [config]="birthdayOptions"
+                                  name="birthday"
+                                  formControlName="birthday"
+                                  placeholder="Pick birthday"
+                                  #birthdayPicker
+                                  required
+                                  [ngClass]="{'error': isSubmitted && formGroup.get('birthday').errors}"
+                          ></ng2-flatpickr>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label for="phone">Phone</label>
                           <input

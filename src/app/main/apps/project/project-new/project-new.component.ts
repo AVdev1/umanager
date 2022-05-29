@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 
 import {Observable, Subject} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,8 +10,7 @@ import { cloneDeep } from 'lodash';
 import {BaseForm} from "../../../../../@core/abstracts/base-form.component";
 import {ProjectNewService} from "./project-new.service";
 import { Project } from '../project.model';
-import {UserListService} from "../../user/user-list/user-list.service";
-// import domtoimage from 'dom-to-image';
+import {User} from "../../../../auth/models";
 
 @Component({
   selector: 'app-project-new',
@@ -30,6 +29,7 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
   public tempRow;
   public avatarImage: string;
   public project: Project;
+  public currentUser: User;
 
   //  Decorator
   @ViewChild('accountForm') accountForm: NgForm;
@@ -60,7 +60,7 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
   // Private
   private _unsubscribeAll: Subject<any>;
   public formGroup: FormGroup = new FormGroup({
-    creator: this.formBuilder.control("d5063888-d441-11ec-a1c8-0242ac120007", {}),
+    creator: this.formBuilder.control("", {}),
     pname: this.formBuilder.control("", {
       validators: [Validators.required],
     }),
@@ -70,7 +70,8 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
     summary: this.formBuilder.control("", {
       validators: [Validators.required],
     }),
-    maintainer: this.formBuilder.control("d5063888-d441-11ec-a1c8-0242ac120007", {}),
+    maintainer: this.formBuilder.control("", {}),
+    budget: this.formBuilder.control("", {}),
     team: this.formBuilder.control([], {}),
     category: this.formBuilder.control({}, {}),
     start: this.formBuilder.control(null, {}),
@@ -126,17 +127,16 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
    *
    */
   prepareRequest(): Observable<any> {
-    // console.log('this.avatarImage', this.avatarImage)
-    // console.log('this.customAvatar', this.customAvatar)
-    // this.submitted = true;
     this.submitPrepare();
     const data = this.formGroup.value;
 
     //! Fix: Temp fix till ng2-flatpicker support ng-modal
     data.start = this.startDatePicker.flatpickrElement.nativeElement.children[0].value;
     data.end = this.endDatePicker.flatpickrElement.nativeElement.children[0].value;
+    data.budget = Number(data?.budget);
+    data.creator = this.currentUser?.id;
+    data.maintainer = this.currentUser?.id;
 
-    console.log('data', data)
     return this._projectNewService.createProject(data);
   }
 
@@ -150,20 +150,14 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
       this.rows = response;
       this.rows.map(row => {
         if (row.id == this.urlLastValue) {
-          // this.currentRow = row;
-          // this.avatarImage = this.currentRow.avatar;
           this.tempRow = cloneDeep(row);
         }
       });
     });
 
-    // this._projectNewService.onProjectNewChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-    //   this.userList = response;
-    // });
+    // get the currentUser details from localStorage
+    this.currentUser = JSON.parse(localStorage.getItem('currentUserData'));
 
-    // this._projectNewService.onProjectNewChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
-    //   this.categoryList = response;
-    // })
     this.categoryList = this._projectNewService.categoryList;
     this.userList = this._projectNewService.userList;
 
@@ -171,7 +165,6 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
 
     this.formGroup.valueChanges.subscribe((i: any) => {
       this.currentRow = i;
-      console.log('i', i)
     })
   }
 

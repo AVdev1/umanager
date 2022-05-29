@@ -5,6 +5,7 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { BehaviorSubject, Observable } from 'rxjs';
 import {AdminApiService} from "../../../../../@core/abstracts/admin-api.service";
 import {User} from "../user.model";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable()
 export class UserListService extends AdminApiService implements Resolve<any> {
@@ -17,7 +18,7 @@ export class UserListService extends AdminApiService implements Resolve<any> {
    *
    * @param {HttpClient} _httpClient
    */
-  constructor(private _httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient, public _toastrService: ToastrService) {
     super(_httpClient);
     // Set the defaults
     this.onUserListChanged = new BehaviorSubject({});

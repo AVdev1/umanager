@@ -9,7 +9,6 @@ export const menu: CoreMenu[] = [
     title: 'Dashboard',
     translate: 'MENU.DASHBOARD.COLLAPSIBLE',
     type: 'collapsible',
-    // role: ['Admin'], //? To hide collapsible based on user role
     icon: 'home',
     badge: {
       title: '2',
@@ -17,15 +16,14 @@ export const menu: CoreMenu[] = [
       classes: 'badge-light-warning badge-pill'
     },
     children: [
-      {
-        id: 'analytics',
-        title: 'Analytics',
-        translate: 'MENU.DASHBOARD.ANALYTICS',
-        type: 'item',
-        // role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
-        icon: 'circle',
-        url: 'dashboard/analytics'
-      },
+      // {
+      //   id: 'analytics',
+      //   title: 'Analytics',
+      //   translate: 'MENU.DASHBOARD.ANALYTICS',
+      //   type: 'item',
+      //   icon: 'circle',
+      //   url: 'dashboard/analytics'
+      // },
       {
         // If role is not assigned will be display to all
         id: 'ecommerce',

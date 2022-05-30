@@ -39,11 +39,11 @@ export class SearchFakeData {
         // },
         {
           id: 4,
-          target: 'todo',
+          target: 'task',
           isBookmarked: true,
-          title: 'Todo',
+          title: 'Task',
           icon: 'check-square',
-          link: '/apps/todo'
+          link: '/apps/task'
         },
         {
           id: 5,

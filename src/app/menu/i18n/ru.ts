@@ -12,7 +12,7 @@ export const locale = {
         SECTION: 'Apps & Pages',
         EMAIL: 'Email',
         CHAT: 'Chat',
-        TODO: 'Todo',
+        TODO: 'Task',
         CALENDAR: 'Calendar',
         INVOICE: {
           COLLAPSIBLE: 'Invoice',

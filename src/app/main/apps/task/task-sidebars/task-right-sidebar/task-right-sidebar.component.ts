@@ -26,6 +26,7 @@ export class TaskRightSidebarComponent extends BaseForm implements OnInit  {
   public selectAssignee;
   public userList: User[];
   public projectList: Project[];
+  public currentUser: User;
 
   @ViewChild('dueDateRef') private dueDateRef: any;
   @ViewChild('startDateRef') private startDateRef: any;
@@ -105,6 +106,7 @@ export class TaskRightSidebarComponent extends BaseForm implements OnInit  {
     const data = this.formGroup.value;
     data.duedate = this.dueDateRef.flatpickrElement.nativeElement.children[0].value;
     data.startdate = this.startDateRef.flatpickrElement.nativeElement.children[0].value;
+    data.author = this.currentUser?.id;
 
     console.log('data', data)
     // this.addTodo(data);
@@ -184,6 +186,10 @@ export class TaskRightSidebarComponent extends BaseForm implements OnInit  {
     //     this.isDataEmpty = true;
     //   }
     // });
+
+    // get the currentUser details from localStorage
+    this.currentUser = JSON.parse(localStorage.getItem('currentUserData'));
+
     this.isDataEmpty = true;
     this._taskService.onTagsChange.subscribe(response => {
       this.selectTags = response.map(tagRef => {

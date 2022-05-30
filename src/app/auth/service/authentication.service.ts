@@ -83,7 +83,7 @@ export class AuthenticationService extends AdminApiService {
             setTimeout(() => {
               this._toastrService.success(
                 'You have successfully logged in as an ' +
-                  'user to Vuexy. Now you can start to explore. Enjoy! 🎉',
+                  'user to Umanager. Now you can start to explore. Enjoy! 🎉',
                 '👋 Welcome, ' + cu?.name + '!',
                 { toastClass: 'toast ngx-toastr', closeButton: true }
               );

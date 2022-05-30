@@ -50,11 +50,12 @@
   <!-- Todo List -->
   <div class="todo-task-list-wrapper list-group" [perfectScrollbar]>
     <ul class="todo-task-list media-list" id="todo-task-list" dragula="todo-tasks-drag-area">
-<!--      <app-task-list-item-->
-<!--        [task]="task"-->
-<!--        *ngFor="let task of tasks; let i = index"-->
-<!--        (click)="openTodo(task.id); $event.stopPropagation()"-->
-<!--      ></app-task-list-item>-->
+      <app-task-list-item
+        [task]="task"
+        *ngFor="let task of tasks; let i = index"
+      ></app-task-list-item>
+<!--      (click)="openTodo(task.id); $event.stopPropagation()"-->
+
       <ng-container *ngIf="tasks.length; else noResults"></ng-container>
     </ul>
 

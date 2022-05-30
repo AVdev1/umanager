@@ -30,5 +30,7 @@ export class TaskListItemComponent implements OnInit {
     this._taskService.updateCurrentTask(this.task);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('this.task', this.task)
+  }
 }

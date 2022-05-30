@@ -24,7 +24,7 @@ export const snippetCodeTranslucent: snippetCode = {
       class="mr-2"
       alt="Toast image"
     />
-    <strong class="mr-auto toast-title">Vuexy Admin</strong>
+    <strong class="mr-auto toast-title">Umanager Admin</strong>
     <small class="text-muted toast-time ml-5 mr-1 pl-3">11 mins ago</small>
   </ng-template>
   Hello, world! This is a toast message.

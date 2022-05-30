@@ -96,27 +96,27 @@
                           <!--/ Add custom Tag -->
                         </div>
                       </div>
-                      <div class="col-sm-6 col-12">
-                        <label>Team</label>
+<!--                      <div class="col-sm-6 col-12">-->
+<!--                        <label>Team</label>-->
 
-                        <div class="form-group">
-                          <!-- Add custom Tag -->
-                          <ng-select
-                                  [items]="userList"
-                                  multiple="true"
-                                  bindLabel="username"
-                                  bindValue="id"
-                                  placeholder="Select team"
-                                  formControlName="team"
-                          >
-                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                              <span class="ng-value-label"> {{ item?.first_name }} {{item?.last_name}}</span>
-                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                            </ng-template>
-                          </ng-select>
-                          <!--/ Add custom Tag -->
-                        </div>
-                      </div>
+<!--                        <div class="form-group">-->
+<!--                          &lt;!&ndash; Add custom Tag &ndash;&gt;-->
+<!--                          <ng-select-->
+<!--                                  [items]="userList"-->
+<!--                                  multiple="true"-->
+<!--                                  bindLabel="username"-->
+<!--                                  bindValue="id"-->
+<!--                                  placeholder="Select team"-->
+<!--                                  formControlName="team"-->
+<!--                          >-->
+<!--                            <ng-template ng-label-tmp let-item="item" let-clear="clear">-->
+<!--                              <span class="ng-value-label"> {{ item?.first_name }} {{item?.last_name}}</span>-->
+<!--                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>-->
+<!--                            </ng-template>-->
+<!--                          </ng-select>-->
+<!--                          &lt;!&ndash;/ Add custom Tag &ndash;&gt;-->
+<!--                        </div>-->
+<!--                      </div>-->
                       <div class="col-sm-6 col-12">
                         <div class="form-group position-relative">
                           <label for="start-date" class="form-label">Start Date</label>

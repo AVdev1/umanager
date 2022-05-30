@@ -81,6 +81,9 @@ export class TaskListComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe Todos change
-    this._taskService.onTaskDataChange.subscribe(response => (this.tasks = response));
+    this._taskService.onTaskDataChange.subscribe(response => {
+      console.log('response', response)
+      this.tasks = response?.items;
+    });
   }
 }

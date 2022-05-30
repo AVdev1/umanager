@@ -61,22 +61,23 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
   private _unsubscribeAll: Subject<any>;
   public formGroup: FormGroup = new FormGroup({
     creator: this.formBuilder.control("", {}),
-    pname: this.formBuilder.control("", {
+    pname: this.formBuilder.control("Eurointegration", {
       validators: [Validators.required],
     }),
-    pkey: this.formBuilder.control("", {
+    pkey: this.formBuilder.control("EUGTN", {
       validators: [Validators.required],
     }),
-    summary: this.formBuilder.control("", {
+    summary: this.formBuilder.control("Summary", {
       validators: [Validators.required],
     }),
     maintainer: this.formBuilder.control("", {}),
     budget: this.formBuilder.control("", {}),
-    team: this.formBuilder.control([], {}),
     category: this.formBuilder.control({}, {}),
     start: this.formBuilder.control(null, {}),
     end: this.formBuilder.control(null, {}),
   })
+
+  // team: this.formBuilder.control([{id: ''}], {}),
 
   /**
    * Constructor
@@ -137,6 +138,15 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
     data.creator = this.currentUser?.id;
     data.maintainer = this.currentUser?.id;
 
+    // let test = [];
+    //
+    // this.formGroup.value.team.map(i => {
+    //   test.push({id: i})
+    // })
+    //
+    // data.team = test;
+    console.log('data', data)
+
     return this._projectNewService.createProject(data);
   }
 
@@ -164,6 +174,11 @@ export class ProjectNewComponent extends BaseForm implements OnInit, OnDestroy {
     this.currentRow = this.formGroup.getRawValue();
 
     this.formGroup.valueChanges.subscribe((i: any) => {
+      console.log('this.formGroup', this.formGroup.value)
+
+
+
+      // console.log('test', test)
       this.currentRow = i;
     })
   }

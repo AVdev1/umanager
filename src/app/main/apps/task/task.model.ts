@@ -8,6 +8,7 @@ export class Task extends Model {
   startdate = null;
   description = '';
   assignee = '';
+  avatar: '';
   project = null;
   type = '';
   tags = [];
@@ -15,4 +16,7 @@ export class Task extends Model {
   deleted = false;
   author: '';
   manager: '';
+  manager_first_name: '';
+  manager_last_name: '';
+  project_name: '';
 }

@@ -249,7 +249,9 @@ export class TaskService extends AdminApiService implements Resolve<any> {
    * @param id
    */
   setCurrentTodo(id) {
-    this.currentTask = this.tasks.find(todo => {
+    console.log('this.tasks', this.tasks)
+    //@ts-ignore
+    this.currentTask = this.tasks?.items?.find(todo => {
       return todo.id === id;
     });
     this.onCurrentTaskChange.next(this.currentTask);
